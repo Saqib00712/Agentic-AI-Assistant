@@ -18,7 +18,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}   # ✅ FIXED
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -31,9 +31,7 @@ jobs:
           IMAGE_TAG: latest
         run: |
           IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
           echo "Building image: $IMAGE_URI"
-
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
 
@@ -47,7 +45,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          aws-region: ${{ secrets.AWS_REGION }}   # ✅ FIXED
 
       - name: Login to Amazon ECR
         id: login-ecr
